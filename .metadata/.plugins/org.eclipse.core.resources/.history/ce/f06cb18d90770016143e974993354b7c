@@ -1,0 +1,10 @@
+package br.senai.sp.informatica.todolist.modelo;
+
+public class Lista {
+
+	private Long id;
+	private String titulo;
+	
+	private Listt<ItemList> itens;
+	
+}

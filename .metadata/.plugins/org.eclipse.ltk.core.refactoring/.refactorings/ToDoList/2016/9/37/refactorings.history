@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;br.senai.sp.informatica.todolist.modelo.ItemLista.lista&apos; in &apos;br.senai.sp.informatica.todolist.modelo.ItemLista&apos;&#x0D;&#x0A;- Original project: &apos;ToDoList&apos;&#x0D;&#x0A;- Original element: &apos;br.senai.sp.informatica.todolist.modelo.ItemLista.lista&apos;&#x0D;&#x0A;- Getter method name: &apos;getLista&apos;&#x0D;&#x0A;- Setter method name: &apos;setLista&apos;&#x0D;&#x0A;- Field visibility: &apos;public&apos;&#x0D;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;lista&apos;" flags="589830" getter="getLista" id="org.eclipse.jdt.ui.self.encapsulate" input="/src&lt;br.senai.sp.informatica.todolist.modelo{ItemLista.java[ItemLista^lista" insertion="5" setter="setLista" stamp="1473540188001" version="1.0" visibility="1"/>
+</session>

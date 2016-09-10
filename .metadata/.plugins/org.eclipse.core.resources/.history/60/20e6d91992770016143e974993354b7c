@@ -1,0 +1,12 @@
+package br.senai.sp.informatica.todolist.modelo;
+
+import java.util.List;
+
+public class Lista {
+
+	private Long id;
+	private String titulo;
+	//Lista genérica de ItemLista -> LISTA é uma INTERFACE (java.util)
+	private List<ItemLista> itens;
+	
+}

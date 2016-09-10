@@ -1,0 +1,54 @@
+package br.senai.sp.informatica.todolist.modelo;
+
+import java.util.List;
+
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+//Usaremos  sempre javax.persistence, sempre utilizar a especificação não o PRODUTO (HIBERNATE)
+@Entity
+public class Lista {
+
+	@Id
+	@Generated
+	private Long id;
+	private String titulo;
+	// Lista genérica de ItemLista -> LISTA é uma INTERFACE (java.util)
+	private List<ItemLista> itens;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public List<ItemLista> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<ItemLista> itens) {
+		this.itens = itens;
+	}
+
+	//Boolean sempre utiliza prefixo IS
+	public boolean isRealizada(){
+		for (ItemLista item : itens) {
+			if(!item.isFeito()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+}
