@@ -7,6 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+//Ignore a propriedade. Ignora a propriedade para não entrar em looping infinito
+@JsonIgnoreProperties("lista")
 @Entity
 public class ItemLista {
 
