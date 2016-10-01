@@ -5,10 +5,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 //Usaremos  sempre javax.persistence, sempre utilizar a especificação não o PRODUTO (HIBERNATE)
 @Entity
@@ -23,7 +26,7 @@ public class Lista {
 
 	//Mapeada pela variavel lista
 	//Cascade = A forma que você quer que seja propagado.
-	@OneToMany(mappedBy="lista", cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(mappedBy="lista", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
 	// Lista genérica de ItemLista -> LISTA é uma INTERFACE (java.util)
 	private List<ItemLista> itens;
 
@@ -51,6 +54,8 @@ public class Lista {
 		this.itens = itens;
 	}
 
+	//Pode ter o nome do atributo com um nome, e o JSON ver com outro
+	@JsonProperty("feito")
 	//Boolean sempre utiliza prefixo IS
 	public boolean isRealizada(){
 		for (ItemLista item : itens) {

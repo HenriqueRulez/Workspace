@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,7 +30,7 @@ public class ListaRestController {
 	
 	//Quando for uma requisição para LISTA, dispara este método.  MediaType (Spring)    -APPLICATION_JSON_UTF8_VALUE retornar *STRING*.
 	@RequestMapping(value="/lista", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@Transactional
+	
 	//Mapeando o parametro RequestBody, vem no corpo da requisição
 	public ResponseEntity<Lista> inserir(@RequestBody String strLista){
 	
@@ -53,7 +53,7 @@ public class ListaRestController {
 			//
 			listaDao.inserir(lista);
 			//
-			URI location = new URI("/todo/"+lista.getId());
+			URI location = new URI("/lista/"+lista.getId());
 			//
 			return ResponseEntity.created(location).body(lista);
 			
@@ -63,5 +63,51 @@ public class ListaRestController {
 		}
 		
 	}
+	
+	@RequestMapping(value="/lista", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Lista> listar(){
+		
+		return listaDao.listar();
+		
+	}
+	
+	@RequestMapping(value="/lista/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Lista> listarCriteria(@PathVariable("id") long idLista){
+		
+		return listaDao.listarCriteria(idLista);
+		
+	}
+	
+	//Como não vamos retornar nada, usaremos uma classe VOID. Sem espeficicar o ResponseEntity também funciona, mas apita warning
+	//Valor entre {} é variavel
+	@RequestMapping(value="/lista/{id}", method=RequestMethod.DELETE)
+	//Se o nome do mapeamento for o mesmo do parametro, não precisa especificar variavel ("id")
+	public ResponseEntity<Void> excluir(@PathVariable("id") long idLista){
+		
+		listaDao.excluir(idLista);
+		//Atalho para não instanciar o NEW responseEntity
+		//.build é para construir aquilo 
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value="/item/{idItem}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> excluirItem(@PathVariable long idItem){
+		
+		try {
+			listaDao.excluirItem(idItem);
+			return ResponseEntity.noContent().build();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+		//REALIZAR /LISTA/ID
+		// /ITEM/ID
+		
+	}
+	
+	
 	
 }
